@@ -32,15 +32,10 @@ export function Home() {
       return;
     }
 
-    const roomRef = await database.ref(`rooms/${roomCode}`).get();
+    const roomRef = database.ref(`rooms/${roomCode}`).get();
 
-    if (!roomRef.exists()) {
+    if (!(await roomRef).exists()) {
       alert("Room doesn't exists");
-      return;
-    }
-
-    if (roomRef.val().endedAt) {
-      alert("Room already closed");
       return;
     }
 
